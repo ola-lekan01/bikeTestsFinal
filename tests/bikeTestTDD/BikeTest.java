@@ -1,6 +1,7 @@
 package bikeTestTDD;
 
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 //PART I
 
 public class BikeTest {
+
+    private AutoBike iBike;
+
+    @BeforeEach
+    void setup() {iBike = new AutoBike();}
+
     @Test
     @DisplayName("To test that the Bike can be turned On")
 
     public void turnOn(){
-        //given
-        AutoBike iBike = new AutoBike();
+
         //When
         iBike.turnOn(true);
         //check
@@ -25,8 +31,6 @@ public class BikeTest {
     @DisplayName("To test that the Bike can be turned Off")
 
     public void turnOff() {
-        //Given
-        AutoBike iBike = new AutoBike();
         //When
         iBike.turnOn(false);
         //Check
@@ -37,8 +41,6 @@ public class BikeTest {
     @DisplayName("To Test that the Bike can be accelerated with an Increment of 1 When on Gear One")
 
     public void accelerationPlusOne() {
-        //Given
-        AutoBike iBike = new AutoBike();
         //When
         iBike.increaseSpeed(19);
         //Check
@@ -49,8 +51,6 @@ public class BikeTest {
     @DisplayName("To Test That the Bike can be Accelerated with an Increment of 2 When on Gear Two")
     public void accelerationPlusTwo(){
 
-        //Given
-        AutoBike iBike = new AutoBike();
         //when
         iBike.increaseSpeed(25);
         //Check
@@ -61,8 +61,6 @@ public class BikeTest {
     @DisplayName("To Test That the Bike can be Accelerated with an Increment of 3 When on Gear Three")
     public void accelerationPlusThree(){
 
-        //Given
-        AutoBike iBike = new AutoBike();
         //when
         iBike.increaseSpeed(35);
         //Check
@@ -73,8 +71,6 @@ public class BikeTest {
     @DisplayName("To Test That the Bike can be Accelerated with an Increment of 4 When on Gear Four")
     public void accelerationPlusFour(){
 
-        //Given
-        AutoBike iBike = new AutoBike();
         //when
         iBike.increaseSpeed(41);
         //Check
@@ -85,8 +81,7 @@ public class BikeTest {
     @DisplayName("To Test that the Bike can be decelerated with a decrement of 1 When on Gear One")
 
     public void decelerationGearOne() {
-        //Given
-        AutoBike iBike = new AutoBike();
+
         //When
         iBike.decreaseSpeed(15);
         //Check
@@ -97,8 +92,6 @@ public class BikeTest {
     @DisplayName("To Test that the Bike can be decelerated with a decrement of 2 When on Gear Two")
 
     public void decelerationGearTwo() {
-        //Given
-        AutoBike iBike = new AutoBike();
         //When
         iBike.decreaseSpeed(23);
         //Check
@@ -109,8 +102,7 @@ public class BikeTest {
     @DisplayName("To Test that the Bike can be decelerated with a decrement of 3 When on Gear Three")
 
     public void decelerationGearThree() {
-        //Given
-        AutoBike iBike = new AutoBike();
+
         //When
         iBike.decreaseSpeed(35);
         //Check
@@ -121,8 +113,7 @@ public class BikeTest {
     @DisplayName("To Test that the Bike can be decelerated with a decrement of 4 When on Gear Four")
 
     public void decelerationGearFour() {
-        //Given
-        AutoBike iBike = new AutoBike();
+
         //When
         iBike.decreaseSpeed(45);
         //Check
@@ -135,8 +126,7 @@ public class BikeTest {
     @Test
     @DisplayName("To test the Speed Range for Gear One")
     public void gearOneSpeedRange(){
-        //Given
-        AutoBike iBike = new AutoBike();
+
         //When
         iBike.gearMax(15);
         //Check
@@ -146,8 +136,7 @@ public class BikeTest {
     @Test
     @DisplayName("To test the Speed Range for Gear Two")
     public void gearTwoSpeedRange(){
-        //Given
-        AutoBike iBike = new AutoBike();
+
         //When
         iBike.gearMax(25);
         //Check
@@ -157,8 +146,7 @@ public class BikeTest {
     @Test
     @DisplayName("To test the Speed Range for Gear Three")
     public void gearThreeSpeedRange(){
-        //Given
-        AutoBike iBike = new AutoBike();
+
         //When
         iBike.gearMax(35);
         //Check
@@ -168,8 +156,7 @@ public class BikeTest {
     @Test
     @DisplayName("To test the Speed Range for Gear One")
     public void gearFOurSpeedRange(){
-        //Given
-        AutoBike iBike = new AutoBike();
+
         //When
         iBike.gearMax(55);
         //Check

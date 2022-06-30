@@ -3,7 +3,7 @@ package bikeTestTDD;
 public class AutoBike {
 
 
-    private boolean isOn;
+    private boolean isOn = true;
     private int speed = -1;
     private String gear;
 
@@ -13,7 +13,7 @@ public class AutoBike {
     }
 
     public boolean setOn() {
-        if (isOn = true) {
+        if (isOn) {
             return true;
         } else {
             return false;
