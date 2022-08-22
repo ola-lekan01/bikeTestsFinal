@@ -1,81 +1,144 @@
 package bikeTestTDD;
 
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 //PART I
-
 public class BikeTest {
-
     private AutoBike iBike;
-
     @BeforeEach
     void setup() {iBike = new AutoBike();}
 
     @Test
     @DisplayName("To test that the Bike can be turned On")
-
     public void turnOn(){
-
-        //When
-        iBike.turnOn(true);
-        //check
-        assertTrue(iBike.setOn());
+        assertFalse(iBike.isOn());
+        iBike.turnOn();
+        assertTrue(iBike.isOn());
     }
 
     @Test
-    @DisplayName("To test that the Bike can be turned Off")
-
+    @DisplayName("To test that the Bike can be turned Off When Bike is turned Off")
     public void turnOff() {
-        //When
-        iBike.turnOn(false);
-        //Check
-        assertTrue(iBike.setOn());
+        assertFalse(iBike.isOn());
+        //When Bike is turned On
+        iBike.turnOn();
+        assertTrue(iBike.isOn());
+
+        //Check that bike can be turned Off
+        iBike.turnOff();
+        assertFalse(iBike.isOn());
     }
+
     //PART TWO
     @Test
     @DisplayName("To Test that the Bike can be accelerated with an Increment of 1 When on Gear One")
 
     public void accelerationPlusOne() {
+        iBike.turnOn();
+
+        assertEquals(0, iBike.getCurrentSpeed());
+        assertEquals(1, iBike.getGear());
+
         //When
-        iBike.increaseSpeed(19);
+        iBike.increaseSpeed();
+        iBike.increaseSpeed();
+        iBike.increaseSpeed();
+        iBike.increaseSpeed();
         //Check
-        assertEquals(20 , iBike.getCurrentSpeed());
+        assertEquals(4 , iBike.getCurrentSpeed());
+        assertEquals(1, iBike.getGear());
+    }
+
+    @Test
+    public void bikeWillNotAccelerateWhenOffTest(){
+        assertFalse(iBike.isOn());
+        assertEquals(0, iBike.getCurrentSpeed()
+        );
+        iBike.increaseSpeed();
+        iBike.increaseSpeed();
+
+        assertEquals(0, iBike.getCurrentSpeed());
+    }
+
+    @Test
+    public void bikeCanChangeFromGearOneToGearTwoAutomatically(){
+        iBike.turnOn();
+        assertEquals(1, iBike.getGear());
+
+        for (int i = 0; i < 20; i++) {
+            iBike.increaseSpeed();
+        }
+        assertEquals(20, iBike.getCurrentSpeed());
+        assertEquals(1, iBike.getGear());
+        iBike.increaseSpeed();
+        assertEquals(2, iBike.getGear());
+        assertEquals(21, iBike.getCurrentSpeed());
     }
 
     @Test
     @DisplayName("To Test That the Bike can be Accelerated with an Increment of 2 When on Gear Two")
     public void accelerationPlusTwo(){
-
+        iBike.turnOn();
+        assertEquals(1, iBike.getGear());
         //when
-        iBike.increaseSpeed(25);
+        for (int i = 0; i < 21; i++) {
+            iBike.increaseSpeed();
+        }
+        assertEquals(2, iBike.getGear());
+        assertEquals(21, iBike.getCurrentSpeed());
+
+        iBike.increaseSpeed();
+        iBike.increaseSpeed();
+        iBike.increaseSpeed();
         //Check
+        assertEquals(2, iBike.getGear());
         assertEquals(27 , iBike.getCurrentSpeed());
     }
 
     @Test
     @DisplayName("To Test That the Bike can be Accelerated with an Increment of 3 When on Gear Three")
     public void accelerationPlusThree(){
-
+        iBike.turnOn();
         //when
-        iBike.increaseSpeed(35);
+        for (int i = 0; i < 25; i++) {
+            iBike.increaseSpeed();
+        }
+        assertEquals(29, iBike.getCurrentSpeed());
+        assertEquals(2, iBike.getGear());
+
         //Check
-        assertEquals(38 , iBike.getCurrentSpeed());
+        iBike.increaseSpeed();
+        assertEquals(3, iBike.getGear());
+        assertEquals(31 , iBike.getCurrentSpeed());
     }
+
 
     @Test
     @DisplayName("To Test That the Bike can be Accelerated with an Increment of 4 When on Gear Four")
     public void accelerationPlusFour(){
-
+        iBike.turnOn();
         //when
-        iBike.increaseSpeed(41);
+        for (int i = 0; i < 29; i++) {
+            iBike.increaseSpeed();
+        }
+        assertEquals(40, iBike.getCurrentSpeed());
+        assertEquals(3, iBike.getGear());
         //Check
-        assertEquals(45, iBike.getCurrentSpeed());
+        iBike.increaseSpeed();
+        assertEquals(43, iBike.getCurrentSpeed());
+        assertEquals(4, iBike.getGear());
+
+        iBike.increaseSpeed();
+        assertEquals(47, iBike.getCurrentSpeed());
+        assertEquals(4, iBike.getGear());
+
+        iBike.increaseSpeed();
+        iBike.increaseSpeed();
+        assertEquals(55, iBike.getCurrentSpeed());
+        assertEquals(4, iBike.getGear());
     }
+
 
     @Test
     @DisplayName("To Test that the Bike can be decelerated with a decrement of 1 When on Gear One")
@@ -83,7 +146,7 @@ public class BikeTest {
     public void decelerationGearOne() {
 
         //When
-        iBike.decreaseSpeed(15);
+        iBike.decreaseSpeed();
         //Check
         assertEquals(14 , iBike.getCurrentSpeed());
     }
@@ -93,7 +156,7 @@ public class BikeTest {
 
     public void decelerationGearTwo() {
         //When
-        iBike.decreaseSpeed(23);
+        iBike.decreaseSpeed();
         //Check
         assertEquals(21 , iBike.getCurrentSpeed());
     }
@@ -104,7 +167,7 @@ public class BikeTest {
     public void decelerationGearThree() {
 
         //When
-        iBike.decreaseSpeed(35);
+        iBike.decreaseSpeed();
         //Check
         assertEquals(32 , iBike.getCurrentSpeed());
     }
@@ -115,52 +178,9 @@ public class BikeTest {
     public void decelerationGearFour() {
 
         //When
-        iBike.decreaseSpeed(45);
+        iBike.decreaseSpeed();
         //Check
         assertEquals(41 , iBike.getCurrentSpeed());
-    }
-
-
-//Part III
-
-    @Test
-    @DisplayName("To test the Speed Range for Gear One")
-    public void gearOneSpeedRange(){
-
-        //When
-        iBike.gearMax(15);
-        //Check
-        assertEquals( "Gear 1" , iBike.getGearMax());
-    }
-
-    @Test
-    @DisplayName("To test the Speed Range for Gear Two")
-    public void gearTwoSpeedRange(){
-
-        //When
-        iBike.gearMax(25);
-        //Check
-        assertEquals( "Gear 2", iBike.getGearMax());
-    }
-
-    @Test
-    @DisplayName("To test the Speed Range for Gear Three")
-    public void gearThreeSpeedRange(){
-
-        //When
-        iBike.gearMax(35);
-        //Check
-        assertEquals( "Gear 3", iBike.getGearMax());
-    }
-
-    @Test
-    @DisplayName("To test the Speed Range for Gear One")
-    public void gearFOurSpeedRange(){
-
-        //When
-        iBike.gearMax(55);
-        //Check
-        assertEquals( "Gear 4" , iBike.getGearMax());
     }
 
 }

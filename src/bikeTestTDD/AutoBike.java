@@ -1,69 +1,65 @@
 package bikeTestTDD;
 
 public class AutoBike {
+    private boolean isOn;
+    private int speed, gear;
 
-
-    private boolean isOn = true;
-    private int speed = -1;
-    private String gear;
-
-
-    public void turnOn(boolean startEngine) {
-
+    public boolean isOn() {
+        return isOn;
     }
 
-    public boolean setOn() {
-        if (isOn) {
-            return true;
-        } else {
-            return false;
-        }
+    public void turnOn() {
+        isOn = true;
+        gear = 1;
+    }
+
+    public void turnOff() {
+        isOn = false;
+        gear = 0;
+        speed = 0;
     }
 
     public int getCurrentSpeed() {
         return this.speed;
     }
 
-    public void increaseSpeed(int speed){
-
-        if (speed >= 0 && speed < 20) {
-            this.speed = speed + 1;
-        } else if (speed >= 21 && speed <= 30) {
-            this.speed = speed + 2;
-        } else if (speed >= 31 && speed <= 40) {
-            this.speed = speed + 3;
-        } else {
-            this.speed = speed + 4;
+    public void increaseSpeed(){
+        if (isOn) {
+            accelerate();
         }
     }
 
-    public void decreaseSpeed(int speed){
-
-        if (speed >= 0 && speed < 20) {
-            this.speed = speed - 1;
-        } else if (speed >= 21 && speed <= 30) {
-            this.speed = speed - 2;
-        } else if (speed >= 31 && speed <= 40) {
-            this.speed = speed - 3;
-        } else  {
-            this.speed = speed - 4;
-        }
+    public void decreaseSpeed(){
+        if (isOn) speed--;
     }
 
-    public void gearMax(int speed) {
-        if (speed >= 0 && speed < 20) {
-            gear = "Gear 1";
-        } else if (speed >= 21 && speed <= 30) {
-            gear = "Gear 2";
-        } else if (speed >= 31 && speed <= 40) {
-            gear = "Gear 3";
-        } else  {
-            gear = "Gear 4";
-        }
-
-    }
-    public String getGearMax() {
+    public int getGear() {
         return gear;
     }
-}
 
+    private void accelerate(){
+        if (gear == 1) increaseSpeedOnOnGearOne();
+        else if (gear == 2) increaseSpeedOnGearTwo();
+        else if (gear == 3) increaseSpeedOnGearThree();
+        else if (gear == 4) increaseSpeedOnGearFour();
+    }
+
+    private void increaseSpeedOnOnGearOne() {
+        speed++;
+        if (speed > 20) gear++;
+    }
+
+    private void increaseSpeedOnGearTwo() {
+        speed += 2;
+        if (speed >= 31) gear++;
+    }
+
+    private void increaseSpeedOnGearThree() {
+        speed += 3;
+        if (speed >= 41) gear++;
+    }
+
+    private void increaseSpeedOnGearFour() {
+        speed += 4;
+    }
+}
