@@ -18,9 +18,24 @@ public class AutoBike {
         gear = 0;
         speed = 0;
     }
-
+    public int getGear() {
+        return gear;
+    }
     public int getCurrentSpeed() {
         return this.speed;
+    }
+
+    public void decreaseSpeed(){
+        if (isOn) {
+            decelerate();
+        }
+    }
+
+    private void decelerate() {
+        if (gear == 1) speed--;
+        else if(gear == 2)  speed -= 2;
+        else if(gear == 3)  speed -= 3;
+        else if (gear == 4) speed -= 4;
     }
 
     public void increaseSpeed(){
@@ -28,15 +43,6 @@ public class AutoBike {
             accelerate();
         }
     }
-
-    public void decreaseSpeed(){
-        if (isOn) speed--;
-    }
-
-    public int getGear() {
-        return gear;
-    }
-
     private void accelerate(){
         if (gear == 1) increaseSpeedOnOnGearOne();
         else if (gear == 2) increaseSpeedOnGearTwo();
@@ -48,17 +54,14 @@ public class AutoBike {
         speed++;
         if (speed > 20) gear++;
     }
-
     private void increaseSpeedOnGearTwo() {
         speed += 2;
         if (speed >= 31) gear++;
     }
-
     private void increaseSpeedOnGearThree() {
         speed += 3;
         if (speed >= 41) gear++;
     }
-
     private void increaseSpeedOnGearFour() {
         speed += 4;
     }
