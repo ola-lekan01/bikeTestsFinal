@@ -33,9 +33,25 @@ public class AutoBike {
 
     private void decelerate() {
         if (gear == 1) speed--;
-        else if(gear == 2)  speed -= 2;
-        else if(gear == 3)  speed -= 3;
-        else if (gear == 4) speed -= 4;
+        else if(gear == 2) decelerateGearAndSpeedOnGearTwo();
+        else if(gear == 3)  decelerateGearAndSpeedOnGearThree();
+        else if (gear == 4) decelerateGearAndSpeedOnFour();
+    }
+
+    private void decelerateGearAndSpeedOnFour(){
+        speed -= 4;
+        if(speed <= 40) gear--;
+    }
+
+    private void decelerateGearAndSpeedOnGearThree(){
+        speed -= 3;
+        if(speed <= 30) gear--;
+    }
+
+
+    private void decelerateGearAndSpeedOnGearTwo(){
+        speed -= 2;
+        if (speed <= 20) gear--;
     }
 
     public void increaseSpeed(){
